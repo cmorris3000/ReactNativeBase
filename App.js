@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ImageBackground} from 'react-native';
 import Constants from 'expo-constants';
 
-import {Button} from 'native-base';
+import {Button, Form, Item, Input, Label} from 'native-base';
 
 export default class App extends React.Component {
   state={
@@ -17,6 +17,20 @@ export default class App extends React.Component {
         <View style={styles.imageView}>
           <Text>{this.state.customText}</Text>
           <Text>Hello</Text>
+
+          <Form style={styles.formView}>
+            <Item fixedLabel>
+              <Label>Username</Label>
+              <Input />
+            </Item>
+            <Item fixedLabel last>
+              <Label>Password</Label>
+              <Input secureTextEntry={true}/>
+            </Item>
+          </Form>
+
+
+
           <Button onPress={()=>this.setState({customText:'Custon Text'})}><Text style={styles.buttonTextStyle}>Native Base Button</Text></Button>
         </View>
       </ImageBackground>
@@ -43,5 +57,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  formView:{    
+    height: 200,
+    width: 300
   }
 });
