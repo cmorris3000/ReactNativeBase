@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image} from 'react-native';
+import { StyleSheet, Text, View, ImageBackground} from 'react-native';
 import Constants from 'expo-constants';
 
 import {Button} from 'native-base';
@@ -12,9 +12,15 @@ export default class App extends React.Component {
   render (){
     return(
       <View style={styles.container}>
-      <Text>{this.state.customText}</Text>
-      <Image style={styles.imageBackground} source={this.myBackground}/>
-      <Button onPress={()=>this.setState({customText:'Custon Text'})}><Text style={styles.buttonTextStyle}>Native Base Button</Text></Button>
+      
+      <ImageBackground style={styles.imageBackground} source={this.myBackground}>
+        <View style={styles.imageView}>
+          <Text>{this.state.customText}</Text>
+          <Text>Hello</Text>
+          <Button onPress={()=>this.setState({customText:'Custon Text'})}><Text style={styles.buttonTextStyle}>Native Base Button</Text></Button>
+        </View>
+      </ImageBackground>
+      
     </View>
     ) 
   }
@@ -22,10 +28,7 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1    
   },
   buttonTextStyle:{
     color: 'white',
@@ -33,7 +36,12 @@ const styles = StyleSheet.create({
     marginRight: 4
   },
   imageBackground:{
-    height: 500,
-    width: 300
+    flex: 1,
+    
+  },
+  imageView:{
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
