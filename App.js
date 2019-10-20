@@ -2,38 +2,39 @@ import React from 'react';
 import { StyleSheet, Text, View, ImageBackground} from 'react-native';
 import Constants from 'expo-constants';
 
-import {Button, Form, Item, Input, Label} from 'native-base';
+
+import Home from './src/screems/Home';
+import Login from './src/screems/Login';
 
 export default class App extends React.Component {
-  state={
-    customText: ""
+  state={    
+    currentScreem: "Login"
   }
   myBackground= require('./Images/001.jpg')
+
+  //Navigation without react Navigation.
+  renderScreem= ()=>{
+    if(this.state.currentScreem === "Login"){
+      return(
+        <Login switchScreem={this.switchScreem}/>
+      );
+    }else if(this.state.currentScreem === "Home"){
+      return(
+        <Home switchScreem={this.switchScreem}/>
+      );
+    }
+  }
+
+  //Function to change the page
+  switchScreem= (screem)=>{
+    this.setState({currentScreem: screem});
+  }
+
   render (){
     return(
       <View style={styles.container}>
-      
-      <ImageBackground style={styles.imageBackground} source={this.myBackground}>
-        <View style={styles.imageView}>
-          <Text>{this.state.customText}</Text>
-          <Text>Hello</Text>
-
-          <Form style={styles.formView}>
-            <Item fixedLabel>
-              <Label>Username</Label>
-              <Input />
-            </Item>
-            <Item fixedLabel last>
-              <Label>Password</Label>
-              <Input secureTextEntry={true}/>
-            </Item>
-          </Form>
-
-
-
-          <Button onPress={()=>this.setState({customText:'Custon Text'})}><Text style={styles.buttonTextStyle}>Native Base Button</Text></Button>
-        </View>
-      </ImageBackground>
+        {this.renderScreem()}
+        
       
     </View>
     ) 
@@ -43,23 +44,5 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1    
-  },
-  buttonTextStyle:{
-    color: 'white',
-    marginLeft: 4,
-    marginRight: 4
-  },
-  imageBackground:{
-    flex: 1,
-    
-  },
-  imageView:{
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  formView:{    
-    height: 200,
-    width: 300
   }
 });
